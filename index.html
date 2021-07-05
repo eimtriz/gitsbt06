@@ -57,14 +57,13 @@
   //    document.getElementById("buy").style.visibility = 'visible';
   
   
-  
+
   let accounts = [];
   
  
   
       window.addEventListener('load', async () => {
   
-          accounts = await ethereum.request({ method: 'eth_requestAccounts' });  
 
 
           var clock;
@@ -81,14 +80,19 @@ clock.setTime(3000000);
 clock.setCountdown(true);
 clock.start();
   
+accounts = await ethereum.request({ method: 'eth_requestAccounts' });  
+
           if (window.ethereum) {
               window.web3 = new Web3(ethereum);
               try {
                   await ethereum.enable();
                   myWalletAddress = web3.eth.accounts[0];
+
   
               } catch (error) {
+                  alert("Hmm...Looks like Meta Mask Chrome Plugin is not installed..\nPlease install Meta Mask Plugin and TRy on your Chrome Browser\nSee you soon!");
               }
+
           }
   
           // OLD: Legacy dapp browsers...
@@ -99,11 +103,17 @@ clock.start();
   
           // Non-dapp browsers...
           else {
+
+            alert("Hmm...Looks like Meta Mask Chrome Plugin is not installed..\nPlease install Meta Mask Plugin and TRy on your Chrome Browser\nSee you soon!");
+
               return;
           }
   
       if ( !myWalletAddress ) {
             //  document.getElementById("myWallet").innerHTML = "User declined access to MetaMask, reload page and allow access to purchase.";
+
+            alert("Hmm...Looks like Meta Mask Chrome Plugin is not installed..\nPlease install Meta Mask Plugin and TRy on your Chrome Browser\nSee you soon!");
+
       } else {
               
         
@@ -218,6 +228,8 @@ clock.start();
   //        document.getElementById("WalletInfo3").innerHTML = balance + " ETH";
       } catch (error) {
     //      document.getElementById("WalletInfo3").innerHTML = error;
+    alert("Hmm...Looks like Meta Mask Chrome Plugin is not installed..\nPlease install Meta Mask Plugin and TRy on your Chrome Browser\nSee you soon!");
+
       }
     }
   
@@ -244,6 +256,8 @@ clock.start();
 
       } catch (error) {
           document.getElementById("WalletInfo4").innerHTML = "0";
+          alert("Hmm...Looks like Meta Mask Chrome Plugin is not installed..\nPlease install Meta Mask Plugin and TRy on your Chrome Browser\\See you soon!");
+
       }
   }
   
@@ -329,7 +343,7 @@ alert("Great decision! \n\nConverting "+ amtusd + " USD to ETH at Current rate "
         ],
       })
       .then((txHash) => console.log(txHash))
-      .catch((error) => console.error);
+      .catch((error) => alert("Hmm...Looks like Meta Mask Chrome Plugin is not installed..\nPlease install Meta Mask Plugin and TRy on your Chrome Browser\nSee you soon!"));
 
     }
    }
@@ -421,11 +435,11 @@ alert("Great decision! \n\nConverting "+ amtusd + " USD to ETH at Current rate "
 
                 <div class="col d-none d-lg-block text-center animated" data-animation="fadeInUpShorter" data-animation-delay="0.2s">
                     <img src="theme-assets/images/ethersmall.png" alt="icon-arrow">
-                    <p id="WalletInfo2" class="grey-accent2 mt-1">Collecting <br>Wallet Information</p>
+                    <p id="WalletInfo2" class="grey-accent2 mt-1">Connect Meta Mask for <br>Wallet Information</p>
                 </div>
                 <div class="col d-none d-lg-block text-center animated" data-animation="fadeInUpShorter" data-animation-delay="0.2s">
                     <img src="theme-assets/images/sbtxsmall.png" alt="icon-arrow">
-                    <p id="WalletInfo4" class="grey-accent2 mt-1">Collecting <br>Wallet Information</p>
+                    <p id="WalletInfo4" class="grey-accent2 mt-1">Connect Meta Mask for <br>SBTT Deposit</p>
                 </div>
                
 
@@ -435,7 +449,7 @@ alert("Great decision! \n\nConverting "+ amtusd + " USD to ETH at Current rate "
     <!-- Exchange Listing Area Ends -->
 </section>
 <!--/ Exchange Listing Area -->
-                            <h3 class="pt-5 animated" id="targetcap" data-animation="fadeInUpShorter" data-animation-delay="1.7s">$15M Target cap    <strong>$22M Raised</strong></h3>
+                            <h3 class="pt-5 animated" id="targetcap" data-animation="fadeInUpShorter" data-animation-delay="1.7s">Connect your Meta Mask Wallet</strong></h3>
                             <div class="row animated" data-animation="fadeInUpShorter" data-animation-delay="1.9s">
                                 <div class="col-lg-9 col-md-12 mr-auto">
                                     <div class="loading-bar my-3 position-relative">
@@ -458,8 +472,8 @@ alert("Great decision! \n\nConverting "+ amtusd + " USD to ETH at Current rate "
                                                 <div class="progress-bar progress-bar-custom" id="pb2" role="progressbar" style="width: 22%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                             <div class="progress-bottom" id="pb3">
-                                                <div id="weiRaised" class="progress-info">15% target raised</div>
-                                                <div id="rate" class="progress-info"> $1 = 10,000 SBTT </div>
+                                                <div id="weiRaised" class="progress-info">Token Sale on going</div>
+                                                <div id="rate" class="progress-info"> Initial Price $1 = 100,000 SBTT </div>
                                             </div>
                                         </div>
                                     </div>
