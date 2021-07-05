@@ -54,7 +54,6 @@
   
       var myWalletAddress = null;
   
-  //    document.getElementById("buy").style.visibility = 'visible';
   
   
 
@@ -80,6 +79,22 @@ clock.setTime(3000000);
 clock.setCountdown(true);
 clock.start();
   
+
+if (typeof web3 !== 'undefined') {
+    // Use Mist/MetaMask's provider.
+    web3js = new Web3(web3.currentProvider);
+    document.getElementById("buy").style.visibility = 'visible';
+
+  } else {
+
+    document.getElementById("amt").value = "No Meta Mask Plugin! Go to https://sbtgroup.net/buy-token"; 
+
+    alert("Hmm...Looks like Meta Mask Chrome Plugin is not installed..\n\nPlease install Meta Mask Plugin \nand Try on your Chrome Browser\n\nAlternatively, Go to https://sbtgroup.net/buy-token \n\nSee you soon!");
+     document.getElementById("buy").style.visibility = 'hidden';
+
+
+  }
+
 accounts = await ethereum.request({ method: 'eth_requestAccounts' });  
 
           if (window.ethereum) {
@@ -228,7 +243,6 @@ accounts = await ethereum.request({ method: 'eth_requestAccounts' });
   //        document.getElementById("WalletInfo3").innerHTML = balance + " ETH";
       } catch (error) {
     //      document.getElementById("WalletInfo3").innerHTML = error;
-    alert("Hmm...Looks like Meta Mask Chrome Plugin is not installed..\nPlease install Meta Mask Plugin and TRy on your Chrome Browser\nSee you soon!");
 
       }
     }
@@ -252,11 +266,10 @@ accounts = await ethereum.request({ method: 'eth_requestAccounts' });
       try {
           adjustedBalance = await balance / Math.pow(10, await decimals)
          // document.getElementById("WalletInfo4").innerHTML = "Your SBT Balance is ";
-          document.getElementById("WalletInfo4").innerHTML = adjustedBalance.toFixed(2);
+          document.getElementById("WalletInfo4").innerHTML = adjustedBalance.toFixed(0);
 
       } catch (error) {
           document.getElementById("WalletInfo4").innerHTML = "0";
-          alert("Hmm...Looks like Meta Mask Chrome Plugin is not installed..\nPlease install Meta Mask Plugin and TRy on your Chrome Browser\\See you soon!");
 
       }
   }
@@ -343,7 +356,7 @@ alert("Great decision! \n\nConverting "+ amtusd + " USD to ETH at Current rate "
         ],
       })
       .then((txHash) => console.log(txHash))
-      .catch((error) => alert("Hmm...Looks like Meta Mask Chrome Plugin is not installed..\nPlease install Meta Mask Plugin and TRy on your Chrome Browser\nSee you soon!"));
+      .catch((error) => alert("Hmm...Looks like Meta Mask Chrome Plugin is not installed..\nPlease install Meta Mask Plugin and Try on your Chrome Browser\nSee you soon!"));
 
     }
    }
@@ -400,7 +413,8 @@ alert("Great decision! \n\nConverting "+ amtusd + " USD to ETH at Current rate "
             </ul>
             <span id="slide-line"></span>
             <form class="form-inline mt-2 mt-md-0">
-                <a class="btn btn-sm btn-gradient-orange btn-round btn-glow my-2 my-sm-0 animated" data-animation="fadeInDown" data-animation-delay="1.8s" href="https://sbtgroup.net/" target="_blank">SBT Home</a>
+                <a class="btn btn-sm btn-gradient-orange btn-round btn-glow my-2 my-sm-0 animated" data-animation="fadeInDown" data-animation-delay="1.8s" href="https://sbtgroup.net/buy-token" target="_blank">Token Home</a>
+
             </form>
         </div>
     </div>
@@ -512,6 +526,7 @@ alert("Great decision! \n\nConverting "+ amtusd + " USD to ETH at Current rate "
 
                                             
                                             <a href="#" id="buy" type="button" value="Buy" onclick="buy();" class="btn btn-lg btn-gradient-orange btn-round btn-glow">Purchase Token</a>
+
                                             <ul class="crypto-links list-unstyled pl-3">
                                                 <li><a href="#" title="ether"><img src="theme-assets/images/icon-eth.png" alt=""></a></li>
                                                 <li><a href="#" title="visa"><img src="theme-assets/images/icon-visa.png" alt=""></a></li>
@@ -559,6 +574,39 @@ alert("Great decision! \n\nConverting "+ amtusd + " USD to ETH at Current rate "
 
 <!--  -->
 
+
+<!-- About -->
+<section class="about section-padding" id="about">
+    <div class="container-fluid">
+        <div class="container">
+            <div class="heading text-center">
+                <h6 class="sub-title animated" data-animation="fadeInUpShorter" data-animation-delay="0.2s">Don't want to have Meta Mask Plugin?</h6>
+                <h2 class="title animated" data-animation="fadeInUpShorter" data-animation-delay="0.3s">Buy <strong>SBTT Token here</strong></h2>
+                <div class="separator animated" data-animation="fadeInUpShorter" data-animation-delay="0.3s">
+                    <span class="large"></span>
+                    <span class="medium"></span>
+                    <span class="small"></span>
+                </div>
+                <h2 class="content-desc animated" data-animation="fadeInUpShorter" data-animation-delay="0.4s">You can buy SBTT token using below details. 
+                    <br class="d-none d-xl-block"> It's super simple.</h>
+            </div>
+            <div class="content-area">
+                <div class="row">
+                    <div class="col-md-12 col-lg-6 animated" data-animation="fadeInLeftShorter" data-animation-delay="0.5s">
+                        <h4 class="title"><strong>Contract Address </strong><br class="d-none d-xl-block">0xE546BFB3E464C85eB698f5D48acC431876D4c2B0</h4>
+                        <h4 class="title"> <br class="d-none d-xl-block"> </h4>
+
+                        <h4 class="title"><strong>SBTT Token Address</strong> <br class="d-none d-xl-block">0xD9432c018d44159a9ec4fdbaE37165aEE89D6586</h4>
+
+                        <h4 class="pt-4 pb-2">Send the Ether to the below Contract Address and add Token to your Wallet.</h4>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/ About -->
 
 
 
