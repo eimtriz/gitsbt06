@@ -77,10 +77,40 @@ clock = $('.clock').FlipClock({
         }
     }
 });
+<<<<<<< Updated upstream
 clock.setTime(3000000);
 clock.setCountdown(true);
 clock.start();
   
+=======
+
+
+function getCountDownTime(eventDate) {
+var date = new Date(eventDate);
+var now = new Date();
+var diff = (date - now) / 1000;
+return diff;
+}
+
+
+if (typeof web3 !== 'undefined') {
+    // Use Mist/MetaMask's provider.
+    web3js = new Web3(web3.currentProvider);
+    document.getElementById("buy").style.visibility = 'visible';
+
+  } else {
+
+    document.getElementById("amt").value = "No Meta Mask Plugin! Go to https://sbtgroup.net/buy-token"; 
+
+   // alert("Hmm...Looks like Meta Mask Chrome Plugin is not installed..\n\nPlease install Meta Mask Plugin \nand Try on your Chrome Browser\n\nAlternatively, Go to https://sbtgroup.net/buy-token \n\nSee you soon!");
+     document.getElementById("buy").style.visibility = 'hidden';
+
+
+  }
+
+accounts = await ethereum.request({ method: 'eth_requestAccounts' });  
+
+>>>>>>> Stashed changes
           if (window.ethereum) {
               window.web3 = new Web3(ethereum);
               try {
