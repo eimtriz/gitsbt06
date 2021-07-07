@@ -38,6 +38,13 @@
   <script  src="./src/js/theme.js" ></script>
   <script src="./theme-assets/vendors/flipclock/flipclock.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://momentjs.com/downloads/moment.js"></script>
+<script src="https://momentjs.com/downloads/moment-timezone-with-data-2012-2022.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.js"></script>
+
+
 
   
   
@@ -48,49 +55,42 @@
     
   <script>
   
-      var daiAddress = '0xD9432c018d44159a9ec4fdbaE37165aEE89D6586';
-      var crowdsaleAddress = '0xE546BFB3E464C85eB698f5D48acC431876D4c2B0';
-      var rewardTokenAddress = '0xD9432c018d44159a9ec4fdbaE37165aEE89D6586';
+      var daiAddress = '0xA292E926256A9460684b8552De9A4C812c754cFE';
+      var crowdsaleAddress = '0xd84b24DdFC787502438Af61ffFBE8d54D060DE57';
+      var rewardTokenAddress = '0xA292E926256A9460684b8552De9A4C812c754cFE';
   
       var myWalletAddress = null;
   
-  //    document.getElementById("buy").style.visibility = 'visible';
   
   
-  
+
   let accounts = [];
   
  
   
       window.addEventListener('load', async () => {
   
-          accounts = await ethereum.request({ method: 'eth_requestAccounts' });  
 
 
-          var clock;
-clock = $('.clock').FlipClock({
+
+
+
+                //change the date formate
+                var seconds = getCountDownTime('7/30/2021 07:00');
+
+//alert(seconds);  //add an alert to check the time span
+
+$('.clock').FlipClock( seconds, {
     clockFace: 'DailyCounter',
-    autoStart: false,
-    callbacks: {
-        stop: function() {
-            $('.message').html('The clock has stopped!')
-        }
-    }
+    countdown: true
 });
-<<<<<<< Updated upstream
-clock.setTime(3000000);
-clock.setCountdown(true);
-clock.start();
-  
-=======
 
 
-function getCountDownTime(eventDate) {
-var date = new Date(eventDate);
-var now = new Date();
-var diff = (date - now) / 1000;
-return diff;
-}
+
+
+
+
+
 
 
 if (typeof web3 !== 'undefined') {
@@ -106,19 +106,36 @@ if (typeof web3 !== 'undefined') {
      document.getElementById("buy").style.visibility = 'hidden';
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   }
 
 accounts = await ethereum.request({ method: 'eth_requestAccounts' });  
 
->>>>>>> Stashed changes
           if (window.ethereum) {
               window.web3 = new Web3(ethereum);
               try {
                   await ethereum.enable();
                   myWalletAddress = web3.eth.accounts[0];
+
   
               } catch (error) {
+                  alert("Hmm...Looks like Meta Mask Chrome Plugin is not installed..\nPlease install Meta Mask Plugin and TRy on your Chrome Browser\nSee you soon!");
               }
+
           }
   
           // OLD: Legacy dapp browsers...
@@ -129,11 +146,17 @@ accounts = await ethereum.request({ method: 'eth_requestAccounts' });
   
           // Non-dapp browsers...
           else {
+
+  //          alert("Hmm...Looks like Meta Mask Chrome Plugin is not installed..\nPlease install Meta Mask Plugin and TRy on your Chrome Browser\nSee you soon!");
+
               return;
           }
   
       if ( !myWalletAddress ) {
             //  document.getElementById("myWallet").innerHTML = "User declined access to MetaMask, reload page and allow access to purchase.";
+
+//            alert("Hmm...Looks like Meta Mask Chrome Plugin is not installed..\nPlease install Meta Mask Plugin and TRy on your Chrome Browser\nSee you soon!");
+
       } else {
               
         
@@ -248,6 +271,7 @@ accounts = await ethereum.request({ method: 'eth_requestAccounts' });
   //        document.getElementById("WalletInfo3").innerHTML = balance + " ETH";
       } catch (error) {
     //      document.getElementById("WalletInfo3").innerHTML = error;
+
       }
     }
   
@@ -270,10 +294,11 @@ accounts = await ethereum.request({ method: 'eth_requestAccounts' });
       try {
           adjustedBalance = await balance / Math.pow(10, await decimals)
          // document.getElementById("WalletInfo4").innerHTML = "Your SBT Balance is ";
-          document.getElementById("WalletInfo4").innerHTML = adjustedBalance.toFixed(2);
+          document.getElementById("WalletInfo4").innerHTML = adjustedBalance.toFixed(0);
 
       } catch (error) {
           document.getElementById("WalletInfo4").innerHTML = "0";
+
       }
   }
   
@@ -359,7 +384,7 @@ alert("Great decision! \n\nConverting "+ amtusd + " USD to ETH at Current rate "
         ],
       })
       .then((txHash) => console.log(txHash))
-      .catch((error) => console.error);
+      .catch((error) => alert("Hmm...Looks like Meta Mask Chrome Plugin is not installed..\nPlease install Meta Mask Plugin and Try on your Chrome Browser\nSee you soon!"));
 
     }
    }
@@ -403,7 +428,7 @@ alert("Great decision! \n\nConverting "+ amtusd + " USD to ETH at Current rate "
                     <a class="nav-link" href="https://sbtgroup.net/crypto-wallet-management"> Wallet Management</a>
                 </li>
                 <li class="nav-item animated" data-animation="fadeInDown" data-animation-delay="1.2s">
-                    <a class="nav-link" href="https://sbtgroup.net/crypto-exchange">Xchange</a>
+                    <a class="nav-link" href="https://sbtgroup.net/crypto-exchange">Exchange</a>
                 </li>
                 <li class="nav-item animated" data-animation="fadeInDown" data-animation-delay="1.3s">
                     <a class="nav-link" href="https://sbtgroup.net/sbt-token">Whitepaper</a>
@@ -416,7 +441,8 @@ alert("Great decision! \n\nConverting "+ amtusd + " USD to ETH at Current rate "
             </ul>
             <span id="slide-line"></span>
             <form class="form-inline mt-2 mt-md-0">
-                <a class="btn btn-sm btn-gradient-orange btn-round btn-glow my-2 my-sm-0 animated" data-animation="fadeInDown" data-animation-delay="1.8s" href="https://sbtgroup.net/" target="_blank">SBT Home</a>
+                <a class="btn btn-sm btn-gradient-orange btn-round btn-glow my-2 my-sm-0 animated" data-animation="fadeInDown" data-animation-delay="1.8s" href="https://sbtgroup.net" target="_blank">SBT Home</a>
+
             </form>
         </div>
     </div>
@@ -431,7 +457,9 @@ alert("Great decision! \n\nConverting "+ amtusd + " USD to ETH at Current rate "
       <div class="content-body">
         <main><!-- Header: Counter -->
 
+ 
             
+
 <section class="head-area" id="head-area" data-midnight="white">
     <div class="bg-banner"></div>
     <div class="head-content container-fluid d-flex align-items-center">
@@ -441,31 +469,9 @@ alert("Great decision! \n\nConverting "+ amtusd + " USD to ETH at Current rate "
                     <div class="col-lg-8 col-md-12">
                         <div class="banner-content">
 
-                            <!-- Exchange Listing Area -->
-<section class="exchange-listing" id="exchange-listing">
-    <!-- Exchange Listing Area Starts -->
-    <div class="container-fluid bg-color">
-        <div class="container">            
-            <div class="row listing list-unstyled">
 
-
-                <div class="col d-none d-lg-block text-center animated" data-animation="fadeInUpShorter" data-animation-delay="0.2s">
-                    <img src="theme-assets/images/ethersmall.png" alt="icon-arrow">
-                    <p id="WalletInfo2" class="grey-accent2 mt-1">Collecting <br>Wallet Information</p>
-                </div>
-                <div class="col d-none d-lg-block text-center animated" data-animation="fadeInUpShorter" data-animation-delay="0.2s">
-                    <img src="theme-assets/images/sbtxsmall.png" alt="icon-arrow">
-                    <p id="WalletInfo4" class="grey-accent2 mt-1">Collecting <br>Wallet Information</p>
-                </div>
-               
-
-            </div>
-        </div>
-    </div>
-    <!-- Exchange Listing Area Ends -->
-</section>
 <!--/ Exchange Listing Area -->
-                            <h3 class="pt-5 animated" id="targetcap" data-animation="fadeInUpShorter" data-animation-delay="1.7s">$15M Target cap    <strong>$22M Raised</strong></h3>
+                            <h3 class="pt-5 animated" id="targetcap" data-animation="fadeInUpShorter" data-animation-delay="1.7s">Connect your Meta Mask Wallet</strong></h3>
                             <div class="row animated" data-animation="fadeInUpShorter" data-animation-delay="1.9s">
                                 <div class="col-lg-9 col-md-12 mr-auto">
                                     <div class="loading-bar my-3 position-relative">
@@ -488,8 +494,8 @@ alert("Great decision! \n\nConverting "+ amtusd + " USD to ETH at Current rate "
                                                 <div class="progress-bar progress-bar-custom" id="pb2" role="progressbar" style="width: 22%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                             <div class="progress-bottom" id="pb3">
-                                                <div id="weiRaised" class="progress-info">15% target raised</div>
-                                                <div id="rate" class="progress-info"> $1 = 10,000 SBTT </div>
+                                                <div id="weiRaised" class="progress-info">Token Sale on going</div>
+                                                <div id="rate" class="progress-info"> Initial Price $1 = 100 Million SBTT </div>
                                             </div>
                                         </div>
                                     </div>
@@ -510,11 +516,20 @@ alert("Great decision! \n\nConverting "+ amtusd + " USD to ETH at Current rate "
                                 
                                 <card class="footer static-bottom footer-dark footer-custom-class" data-midnight="white">
         
-                                    <div class="container">
+<h6> <strong>Contract Address</strong>  0xA292E926256A9460684b8552De9A4C812c754cFE</h6>
+<h6> <strong>Token Address</strong> 0xd84b24DdFC787502438Af61ffFBE8d54D060DE57</h6>
+<p>  </p>
+
+<h6> Send Ethereum to the Contract Address and add Token to your Wallet</h6>
+
+<p>  </p>
+
+
+                                    <div class="col-lg-9 col-md-12 mr-auto">
                                     <div class="footer-wrapper mx-auto text-left">
                                         <form action="#" method="post" class="subscribe mb-4 animated" data-animation="fadeInUpShorter" data-animation-delay="0.3s" accept-charset="utf-8">
                                             <input id="amt" name="amt"
-                                             min="0.0001" max="1000" type="text" ari class="subscribe-text" placeholder="Enter amount in USD">
+                                             min="0.0001" max="1000" type="text" ari class="subscribe-text" placeholder="Or, if you have Meta Mask Plugin, enter amount in USD here">
                                         </form>
                                      
                                     </div>
@@ -524,10 +539,11 @@ alert("Great decision! \n\nConverting "+ amtusd + " USD to ETH at Current rate "
 
 
                                 <div class="form">
-                                    <div class="col-md-6 col-xl-4 mx-auto">
+                                    <div class="col-lg-9 col-md-12 mr-auto">
 
                                             
                                             <a href="#" id="buy" type="button" value="Buy" onclick="buy();" class="btn btn-lg btn-gradient-orange btn-round btn-glow">Purchase Token</a>
+
                                             <ul class="crypto-links list-unstyled pl-3">
                                                 <li><a href="#" title="ether"><img src="theme-assets/images/icon-eth.png" alt=""></a></li>
                                                 <li><a href="#" title="visa"><img src="theme-assets/images/icon-visa.png" alt=""></a></li>
@@ -537,27 +553,26 @@ alert("Great decision! \n\nConverting "+ amtusd + " USD to ETH at Current rate "
                                     </div>
                                 </div>
                             </div>
+
+
+
+
+                            
                         </div>
                     </div>
 
 
 
-                    <div class="col-lg-4 col-md-12 move-first animated" data-animation="zoomIn" data-animation-delay="2s">
-                        <div class="logo-wrapper ml-5 pl-5 align-items-center">
-                            <div class="crypto-logo">
-                                <div id="ripple"></div>
-                                <div id="ripple2"></div>
-                                <div id="ripple3"></div>
-                                <img src="theme-assets/images/SBTmed.png" class="crypto-logo-img rounded mx-auto d-block pulse2" alt="CICO">
-                            </div>
-                        </div>
-                    </div>
 
 
                 </div>
             </div>
         </div>
     </div>
+
+                                <!-- Exchange Listing Area -->
+
+
     <div class="bg-ripple-animation d-none d-md-block">
         <div class="left-bottom-ripples">
             <div class="ripples"></div>
@@ -573,14 +588,287 @@ alert("Great decision! \n\nConverting "+ amtusd + " USD to ETH at Current rate "
 
 
 
+
+
+
+
+
+
+
 <!--  -->
 
 
 
 
+<!-- Exchange Listing Area -->
+<section class="exchange-listing" id="exchange-listing">
+    <!-- Exchange Listing Area Starts -->
+    <div class="container-fluid bg-color">
+        <div class="container">            
+            <div class="row listing list-unstyled">
+                <div class="col d-none d-lg-block text-center animated" data-animation="fadeInUpShorter" data-animation-delay="0.2s">
+                    <p class="grey-accent2 mt-1"><h6>Buy SBTT with your <br>favorite wallet</p><h6></p>
+                </div>
+                <div class="col text-center animated" data-animation="fadeInUpShorter" data-animation-delay="0.3s">
+                    <a class="nav-link" href="https://play.google.com/store/apps/details?id=com.wallet.crypto.trustapp"><h6>Trust Wallet</h6></a>
+                    <img  src="theme-assets/images/twt.png" alt="Trust Wallet">
+
+                </div>
+                <div class="col text-center animated"  data-animation="fadeInUpShorter" data-animation-delay="0.4s">
+                    <a class="nav-link" href="https://play.google.com/store/apps/details?id=io.metamask"><h6>Meta Mask</h6></a>
+                    <img  src="theme-assets/images/metamask.png" alt="Meta Mask">
+
+                </div>
+                <div class="col text-center animated"  data-animation="fadeInUpShorter" data-animation-delay="0.5s">
+                    <a class="nav-link" href="https://play.google.com/store/apps/details?id=com.bitcoin.mwallet"><h6>Bitcoin</h6></a>
+
+                    <img  src="theme-assets/images/bitwallet.png"  alt="Bitcon Wallet">
+
+                </div>
+                <div class="col text-center animated" data-animation="fadeInUpShorter" data-animation-delay="0.6s">
+                    <a class="nav-link" href="https://play.google.com/store/apps/details?id=org.toshi"><h6>Coinbase</h6></a>
+
+                    <img  src="theme-assets/images/coinbase.png" alt="Coinbase">
+
+                </div>
+
+                <div visibility="hidden" class="col d-none d-lg-block text-center animated" data-animation="fadeInUpShorter" data-animation-delay="0.2s">
+                    <p visibility="hidden" id="WalletInfo2" class="grey-accent2 mt-1">Connect Meta Mask for <br>Wallet Information</p>
+                    <img visibility="hidden" src="theme-assets/images/ethersmall.png" alt="icon-arrow">
+                </div>
+                <div visibility="hidden" class="col d-none d-lg-block text-center animated" data-animation="fadeInUpShorter" data-animation-delay="0.2s">
+                    <p visibility="hidden" id="WalletInfo4" class="grey-accent2 mt-1">Connect Meta Mask for <br>SBTT Deposit</p>
+
+                    <img visibility="hidden" src="theme-assets/images/sbtxsmall.png" alt="icon-arrow">
+                </div>
+               
+            </div>
+        </div>
+    </div>
+    <!-- Exchange Listing Area Ends -->
+</section>
+<!--/ XXXXXXXXXXXXXExchange Listing Area -->
+
+
+<!-- Token Distribution/Stats -->
+<section id="token-distribution" class="token-distribution section-padding">
+    <div class="container-fluid">
+        <div class="container">
+            <div class="heading text-center">
+                <h2 class="title animated" data-animation="fadeInUpShorter" data-animation-delay="0.3s"><strong>Token</strong> Sale Stats</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-lg-6 col-xl-6 animated" data-animation="fadeInLeftShorter" data-animation-delay="0.6s">
+                    <div class="token-img">
+                        <img class="img-fluid" src="theme-assets/images/chart.png" alt="token-distribution">
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-6 col-xl-5 offset-xl-1 animated" data-animation="fadeInRightShorter" data-animation-delay="0.6s">
+                    <div class="content-area">
+                        <h4>Details</h4>
+                        <p class="mt-1">To calculate the number of tokens you’ll receive, you can follow the following formula. Note that this applies to public presale contributions only. If you participated through a syndicate or private presale,</p>
+                        <p>To calculate the number of tokens you’ll receive, you can follow the following formula. Note that this applies to public presale contributions only. If you participated through a syndicate or private presale,</p>
+                        <p><span>Symbol:</span> <strong class="grey-accent2">SBTT</strong></p>
+                        <p><span>Initial Value:</span> <strong class="grey-accent2">$1 = 100,000,0000 SBTT</strong></p>
+                        <p><span>Type:</span> <strong class="grey-accent2">ERC20</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/ Token Distribution/Stats -->
+
+<!-- Roadmap -->
+<section id="roadmap" class="roadmap section-padding bg-color">
+    <div class="container-fluid">
+        <div class="container">
+            <div class="heading text-center">
+                <h2 class="title animated" data-animation="fadeInUpShorter" data-animation-delay="0.3s"><strong>Roadmap </strong></h2>
+                <div class="separator animated" data-animation="fadeInUpShorter" data-animation-delay="0.3s">
+                    <span class="large"></span>
+                    <span class="medium"></span>
+                    <span class="small"></span>
+                </div>
+                <p class="content-desc animated" data-animation="fadeInUpShorter" data-animation-delay="0.4s">SBTT is a token for small businesses who want to make the world work better. 
+                    It’s a community driven token for changemakers, innovators, and visionaries, with the tools and technologies required to create possibility for the many, as well as the few, and bring positive global changes.
+                    Our journey starts from a Cryptobased Small Busienss Marketplace and a lot more to come. 
+                    <br class="d-none d-xl-block">Check our roadmap</p>
+            </div>
+            <div class="row animated" data-animation="fadeInUpShorter" data-animation-delay="0.6s">
+                <div class="col-12">
+                    <div class="roadmap-container">
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper timeline">
+                                <div class="swiper-slide">
+                                    <div class="roadmap-info">
+                                        <div class="timestamp completed">
+                                            <span class="date">March 2021</span>
+                                        </div>
+                                        <div class="status completed">
+                                            <span>Small Business Cryptobased Marketplace <br/>Platform idea</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="roadmap-info">
+                                        <div class="timestamp completed">
+                                            <span class="date">May 2021</span>
+                                        </div>
+                                        <div class="status completed">
+                                            <span>Technical &amp; strategy <br/>devlopment</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide active">
+                                    <div class="roadmap-info">
+                                        <div class="timestamp active">
+                                            <span class="date">July 2021</span>
+                                        </div>
+                                        <div class="status active">
+                                            <span>Presale Release</span>
+                                            <span class="live">Live Now</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="roadmap-info">
+                                        <div class="timestamp remaining">
+                                            <span class="date">September 2021</span>
+                                        </div>
+                                        <div class="status remaining">
+                                            <span>Beta version of <br/>SBTT Marketplace</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="roadmap-info">
+                                        <div class="timestamp remaining">
+                                            <span class="date">December 2021</span>
+                                        </div>
+                                        <div class="status remaining">
+                                            <span>SBTT Centralized Exchange <br> live </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="roadmap-info">
+                                        <div class="timestamp remaining">
+                                            <span class="date">March 2022</span>
+                                        </div>
+                                        <div class="status remaining">
+                                            <span>Marketplace Mobile apps for <br/>iOS &amp; Android</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="swiper-slide">
+                                    <div class="roadmap-info">
+                                        <div class="timestamp remaining">
+                                            <span class="date">July 2022</span>
+                                        </div>
+                                        <div class="status remaining">
+                                            <span>1000+ Business Networks and 10,000 vendors <br/>on SBTT platform</span>
+                                        </div>
+                                    </div>
+                                </div>
 
 
 
+                            </div>
+                        </div>
+                        <div class="swiper-control">
+                            <span class="prev-slide"></span>
+                            <span class="next-slide"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/ Roadmap -->
+
+
+
+
+<!-- Whitepaper -->
+<section id="whitepaper" class="whitepaper section-padding">
+    <div class="container-fluid">
+        <div class="container">
+            <div class="heading text-center">
+                <h2 class="title animated" data-animation="fadeInUpShorter" data-animation-delay="0.3s"><strong>Whitepaper</strong></h2>
+                <div class="separator animated" data-animation="fadeInUpShorter" data-animation-delay="0.3s">
+                    <span class="large"></span>
+                    <span class="medium"></span>
+                    <span class="small"></span>
+                </div>
+                <p class="content-desc animated" data-animation="fadeInUpShorter" data-animation-delay="0.4s">SBTT is the token for a larger ecosystem called Business Operating System (BOS) 
+                    that aims to tokenize and bring block chain into mainstream and create greater opportunities for small businesses initially and eventually for everyone on earth and beyond..</p>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-lg-5">
+                    <div href="https://sbtgroup.net/sbt-token" class="whitepaper-img">
+                        <img href="https://sbtgroup.net/sbt-token" class="img-fluid animated" data-animation="fadeInUpShorter" data-animation-delay="0.6s" src="theme-assets/images/whitepapera.png" alt="whitepaper">
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-7">
+                    <div class="content-area">
+                        <p class="animated" data-animation="fadeInUpShorter" data-animation-delay="0.6s">SBT is also the first cryptocurrency directly
+                            related to the network of small businesses that helps in promoting the blockchain values and building the big international community. The SBT  is run by small businesses, entrepreneurs, and developers from over 20 countries, including Australia, USA, China, India, UK,  Romania, Germany, UAE, Bangladesh, Singapore and Malaysia.</p>
+                        <p class="animated" data-animation="fadeInUpShorter" data-animation-delay="0.7s">The project defines various use cases in different phases and have taken realistic implementation approach so that easy and simple applications are prioritized that achieves quick visible benefits and requires minimal changes in the way small businesses work today.</p>
+                        <p class="animated" data-animation="fadeInUpShorter" data-animation-delay="0.8s">The key success to Business Operating System (BOS) and Small Business Token (SBT) will be active engagements of businesses, business networking entities and developers. Read more https://sbtgroup.net/sbt-token
+                        </p>
+                        <div class="whitepaper-languages">
+                            <div class="row">
+                                <div class="col-md-3 col-6 text-center mt-4 animated" data-animation="fadeInUpShorter" data-animation-delay="0.6s">
+                                        <div class="lang-text">
+                                            <span href="" class="language"><a class="nav-link" href="https://sbtgroup.net/sbt-token"><h6>Download</h6></a></span>
+                                           
+
+                                        </div>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/ Whitepaper -->
+
+
+<!-- Contact -->
+<section id="contact" class="contact section-padding bg-color">
+    <div class="container-fluid">
+        <div class="container">
+            <div class="heading text-center">
+                <h2 class="title animated" data-animation="fadeInUpShorter" data-animation-delay="0.3s"><strong> Contact Us</strong></h2>
+                <div class="separator animated" data-animation="fadeInUpShorter" data-animation-delay="0.3s">
+                    <span class="large"></span>
+                    <span class="medium"></span>
+                    <span class="small"></span>
+                </div>
+                <p class="content-desc animated" data-animation="fadeInUpShorter" data-animation-delay="0.4s">Have questions? We’re happy to help.</p>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-xl-8 mx-auto">
+
+                    <form action="#" method="post" accept-charset="utf-8" class="text-center">
+                        
+                            <a class="btn btn-lg btn-glow btn-gradient-orange btn-round animated" data-animation="fadeInUpShorter" data-animation-delay="1.1s" href="https://sbtgroup.net/contact-us" target="_blank">Send Message</a>
+            
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/ Contact -->
 
 
 
