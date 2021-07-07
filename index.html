@@ -38,6 +38,12 @@
   <script  src="./src/js/theme.js" ></script>
   <script src="./theme-assets/vendors/flipclock/flipclock.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://momentjs.com/downloads/moment.js"></script>
+<script src="https://momentjs.com/downloads/moment-timezone-with-data-2012-2022.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.js"></script>
+
 
 
   
@@ -66,20 +72,31 @@
   
 
 
-          var clock;
-clock = $('.clock').FlipClock({
+
+
+
+                //change the date formate
+                var seconds = getCountDownTime('7/30/2021 07:00');
+
+//alert(seconds);  //add an alert to check the time span
+
+$('.clock').FlipClock( seconds, {
     clockFace: 'DailyCounter',
-    autoStart: false,
-    callbacks: {
-        stop: function() {
-            $('.message').html('The clock has stopped!')
-        }
-    }
+    countdown: true
 });
-clock.setTime(3000000);
-clock.setCountdown(true);
-clock.start();
-  
+
+
+function getCountDownTime(eventDate) {
+var date = new Date(eventDate);
+var now = new Date();
+var diff = (date - now) / 1000;
+return diff;
+}
+
+
+
+
+
 
 if (typeof web3 !== 'undefined') {
     // Use Mist/MetaMask's provider.
@@ -90,7 +107,7 @@ if (typeof web3 !== 'undefined') {
 
     document.getElementById("amt").value = "No Meta Mask Plugin! Go to https://sbtgroup.net/buy-token"; 
 
-    alert("Hmm...Looks like Meta Mask Chrome Plugin is not installed..\n\nPlease install Meta Mask Plugin \nand Try on your Chrome Browser\n\nAlternatively, Go to https://sbtgroup.net/buy-token \n\nSee you soon!");
+   // alert("Hmm...Looks like Meta Mask Chrome Plugin is not installed..\n\nPlease install Meta Mask Plugin \nand Try on your Chrome Browser\n\nAlternatively, Go to https://sbtgroup.net/buy-token \n\nSee you soon!");
      document.getElementById("buy").style.visibility = 'hidden';
 
 
@@ -691,7 +708,7 @@ alert("Great decision! \n\nConverting "+ amtusd + " USD to ETH at Current rate "
                                 <div class="swiper-slide">
                                     <div class="roadmap-info">
                                         <div class="timestamp completed">
-                                            <span class="date">November 2020</span>
+                                            <span class="date">March 2021</span>
                                         </div>
                                         <div class="status completed">
                                             <span>Small Business Cryptobased Marketplace <br/>Platform idea</span>
@@ -701,7 +718,7 @@ alert("Great decision! \n\nConverting "+ amtusd + " USD to ETH at Current rate "
                                 <div class="swiper-slide">
                                     <div class="roadmap-info">
                                         <div class="timestamp completed">
-                                            <span class="date">January 2021</span>
+                                            <span class="date">May 2021</span>
                                         </div>
                                         <div class="status completed">
                                             <span>Technical &amp; strategy <br/>devlopment</span>
